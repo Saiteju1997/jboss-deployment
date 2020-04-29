@@ -1,6 +1,7 @@
 node('Slave1'){
     stage("git clone"){
-       checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'GITHUB', url: 'https://github.com/Saiteju1997/jboss-deployment.git']]])    stage('SonarQube analysis') {
+       checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'GITHUB', url: 'https://github.com/Saiteju1997/jboss-deployment.git']]])   }
+        stage('SonarQube analysis') {
         def scannerHome = tool 'Sonar-3.2';
         def mavenhome = tool  name: 'Maven2' , type: 'maven';
         withSonarQubeEnv('Sonar') {
