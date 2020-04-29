@@ -19,7 +19,7 @@ node('Slave1'){
     stage("copying required files"){
         sh "scp -o StrictHostKeyChecking=no target/*.war root@docker-master:/inet/projects"
         sh "scp -o StrictHostKeyChecking=no Dockerfile root@docker-master:/inet/projects"
-        sh "scp -o StrictHostKeyChecking=no kubernetes-deployment.yml root@k8smaster:/inet/projects"
+        sh "scp -o StrictHostKeyChecking=no kubernetes-jboss-deployment.yml root@k8smaster:/inet"
    }
  }  
 node('Docker-master'){
@@ -42,7 +42,7 @@ node('Docker-master'){
  }                             
  node('kubernetes'){
      stage("deploying the app"){     
-        sh "kubectl delete -f /inet/projects/kubernetes-deployment.yml"
-        sh "kubectl create -f /inet/projects/kubernetes-deployment.yml"
+        sh "kubectl delete -f /inet/kubernetes-deployment.yml"
+        sh "kubectl create -f /inet/kubernetes-deployment.yml"
   }
 }      
